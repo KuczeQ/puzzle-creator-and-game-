@@ -15,10 +15,10 @@ class PuzzleApp:
         self.puzzle_cols = 0
         self.puzzle_rows = 0
         self.puzzle_pieces = []
-        self.expected_pieces = []  # Lista oczekiwanych obrazów na poszczególnych indeksach
+        self.expected_pieces = []  
         self.empty_idx = None  
         
-        self.canvas = tk.Canvas(self.root, width=0, height=0)  # Canvas o początkowych wymiarach 0x0
+        self.canvas = tk.Canvas(self.root, width=0, height=0)  
         self.canvas.pack()
         
         self.select_image_button = tk.Button(self.root, text="Wybierz obraz", command=self.select_image)
@@ -26,9 +26,6 @@ class PuzzleApp:
         
         self.shuffle_button = tk.Button(self.root, text="Przetasuj", command=self.shuffle_puzzle, state=tk.DISABLED)
         self.shuffle_button.pack()
-        
-        self.check_button = tk.Button(self.root, text="Sprawdź", command=self.check_solution, state=tk.DISABLED)
-        self.check_button.pack()
         
         self.canvas.bind("<Button-1>", self.move_piece)
         
@@ -46,7 +43,6 @@ class PuzzleApp:
             self.init_puzzle_pieces()
             self.redraw_puzzle()
             self.shuffle_button.config(state=tk.NORMAL)
-            self.check_button.config(state=tk.NORMAL)
     
     def init_puzzle_pieces(self):
         self.canvas.config(width=self.puzzle_cols * self.puzzle_size, height=self.puzzle_rows * self.puzzle_size)
@@ -56,7 +52,7 @@ class PuzzleApp:
                                                        (col + 1) * self.puzzle_size, (row + 1) * self.puzzle_size))
                 puzzle_piece = ImageTk.PhotoImage(puzzle_piece)
                 self.puzzle_pieces.append(puzzle_piece)
-                self.expected_pieces.append(puzzle_piece)  # Dodanie oczekiwanego obrazu do listy
+                self.expected_pieces.append(puzzle_piece) 
                 
                 self.canvas.create_image(col * self.puzzle_size, row * self.puzzle_size,
                                          anchor=tk.NW, image=puzzle_piece)
@@ -114,7 +110,7 @@ class PuzzleApp:
     def check_solution(self):
         for idx, puzzle_piece in enumerate(self.puzzle_pieces):
             if puzzle_piece is not None and idx != len(self.puzzle_pieces) - 1:
-                expected_piece = self.expected_pieces[idx]  # Pobranie oczekiwanego obrazu z listy
+                expected_piece = self.expected_pieces[idx] 
                 if puzzle_piece != expected_piece:
                     return False
 
